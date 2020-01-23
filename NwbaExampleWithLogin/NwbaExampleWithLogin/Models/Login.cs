@@ -1,17 +1,20 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace NwbaExample.Models
 {
     public class Login
     {
-        [Required, StringLength(8)]
-        [Display(Name = "Login ID")]
+        [Key, Required, StringLength(50)]
+        [Display(Name = "User ID")]
         public string LoginID { get; set; }
-
-        public int CustomerID { get; set; }
-        public virtual Customer Customer { get; set; }
-
         [Required, StringLength(64)]
         public string PasswordHash { get; set; }
+        [Required]
+        public DateTime ModifyDate { get; set; }
+        [Required]
+        public int CustomerID { get; set; }
+        //Nav
+        public virtual Customer Customer { get; set; }
     }
 }

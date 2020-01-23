@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -25,7 +26,10 @@ namespace NwbaExample.Models
         [Column(TypeName = "money")]
         [DataType(DataType.Currency)]
         public decimal Balance { get; set; }
+        [Required]
+        public DateTime ModifyDate { get; set; }
 
         public virtual List<Transaction> Transactions { get; set; }
+        public virtual List<BillPay> Bills { get; set; }
     }
 }

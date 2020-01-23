@@ -7,17 +7,17 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NwbaExample.Data;
 
-namespace NwbaExample.Migrations
+namespace NwbaExampleWithLogin.Migrations
 {
     [DbContext(typeof(NwbaContext))]
-    [Migration("20200111233758_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200123102419_modelUpdate")]
+    partial class modelUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0")
+                .HasAnnotation("ProductVersion", "3.1.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -35,6 +35,9 @@ namespace NwbaExample.Migrations
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("AccountNumber");
 
                     b.HasIndex("CustomerID");
@@ -42,6 +45,40 @@ namespace NwbaExample.Migrations
                     b.ToTable("Accounts");
 
                     b.HasCheckConstraint("CH_Account_Balance", "Balance >= 0");
+                });
+
+            modelBuilder.Entity("NwbaExample.Models.BillPay", b =>
+                {
+                    b.Property<int>("BillPayID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AccountNumber")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("money");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PayeeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Period")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ScheduleDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("BillPayID");
+
+                    b.HasIndex("AccountNumber");
+
+                    b.HasIndex("PayeeID");
+
+                    b.ToTable("BillPays");
+
+                    b.HasCheckConstraint("CH_BillPay_Amount", "Amount>0");
                 });
 
             modelBuilder.Entity("NwbaExample.Models.Customer", b =>
@@ -62,9 +99,22 @@ namespace NwbaExample.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
+
                     b.Property<string>("PostCode")
                         .HasColumnType("nvarchar(4)")
                         .HasMaxLength(4);
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Tfn")
+                        .HasColumnType("nvarchar(11)")
+                        .HasMaxLength(11);
 
                     b.HasKey("CustomerID");
 
@@ -74,11 +124,14 @@ namespace NwbaExample.Migrations
             modelBuilder.Entity("NwbaExample.Models.Login", b =>
                 {
                     b.Property<string>("LoginID")
-                        .HasColumnType("nvarchar(8)")
-                        .HasMaxLength(8);
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("ModifyDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
@@ -87,7 +140,8 @@ namespace NwbaExample.Migrations
 
                     b.HasKey("LoginID");
 
-                    b.HasIndex("CustomerID");
+                    b.HasIndex("CustomerID")
+                        .IsUnique();
 
                     b.ToTable("Logins");
 
@@ -96,12 +150,46 @@ namespace NwbaExample.Migrations
                     b.HasCheckConstraint("CH_Login_PasswordHash", "len(PasswordHash) = 64");
                 });
 
+            modelBuilder.Entity("NwbaExample.Models.Payee", b =>
+                {
+                    b.Property<int>("PayeeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(40)")
+                        .HasMaxLength(40);
+
+                    b.Property<string>("PayeeName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(15)")
+                        .HasMaxLength(15);
+
+                    b.Property<string>("PostCode")
+                        .HasColumnType("nvarchar(4)")
+                        .HasMaxLength(4);
+
+                    b.Property<string>("State")
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.HasKey("PayeeID");
+
+                    b.ToTable("Payees");
+                });
+
             modelBuilder.Entity("NwbaExample.Models.Transaction", b =>
                 {
                     b.Property<int>("TransactionID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<int>("AccountNumber")
                         .HasColumnType("int");
@@ -142,11 +230,26 @@ namespace NwbaExample.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("NwbaExample.Models.BillPay", b =>
+                {
+                    b.HasOne("NwbaExample.Models.Account", "Account")
+                        .WithMany("Bills")
+                        .HasForeignKey("AccountNumber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NwbaExample.Models.Payee", "Payee")
+                        .WithMany("Bills")
+                        .HasForeignKey("PayeeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("NwbaExample.Models.Login", b =>
                 {
                     b.HasOne("NwbaExample.Models.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerID")
+                        .WithOne("Login")
+                        .HasForeignKey("NwbaExample.Models.Login", "CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

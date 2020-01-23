@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\2020Summer\\WDT\\7\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\NwbaExampleWithLogin.csproj": {}
+    "C:\\2020Summer\\WDT\\Assignments\\A2\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\NwbaExampleWithLogin.csproj": {}
   },
   "projects": {
-    "C:\\2020Summer\\WDT\\7\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\NwbaExampleWithLogin.csproj": {
+    "C:\\2020Summer\\WDT\\Assignments\\A2\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\NwbaExampleWithLogin.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\2020Summer\\WDT\\7\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\NwbaExampleWithLogin.csproj",
+        "projectUniqueName": "C:\\2020Summer\\WDT\\Assignments\\A2\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\NwbaExampleWithLogin.csproj",
         "projectName": "NwbaExampleWithLogin",
-        "projectPath": "C:\\2020Summer\\WDT\\7\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\NwbaExampleWithLogin.csproj",
+        "projectPath": "C:\\2020Summer\\WDT\\Assignments\\A2\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\NwbaExampleWithLogin.csproj",
         "packagesPath": "C:\\Users\\heiye\\.nuget\\packages\\",
-        "outputPath": "C:\\2020Summer\\WDT\\7\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\obj\\",
+        "outputPath": "C:\\2020Summer\\WDT\\Assignments\\A2\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\heiye\\AppData\\Roaming\\NuGet\\NuGet.Config",

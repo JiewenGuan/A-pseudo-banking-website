@@ -9,15 +9,17 @@ namespace NwbaExample.Models
         Deposit = 1,
         Withdraw = 2,
         Transfer = 3,
-        ServiceCharge = 4
+        ServiceCharge = 4,
+        BillPay = 5
     }
 
     public class Transaction
     {
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int TransactionID { get; set; }
-
+        [Required]
         public TransactionType TransactionType { get; set; }
-
+        [Required]
         public int AccountNumber { get; set; }
         public virtual Account Account { get; set; }
 
@@ -30,7 +32,7 @@ namespace NwbaExample.Models
 
         [StringLength(255)]
         public string Comment { get; set; }
-
+        [Required]
         public DateTime TransactionTimeUtc { get; set; }
     }
 }

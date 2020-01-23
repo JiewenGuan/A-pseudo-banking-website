@@ -1,10 +1,9 @@
-﻿// ReSharper disable All
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace NwbaExample.Migrations
+namespace NwbaExampleWithLogin.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class modelUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,13 +13,33 @@ namespace NwbaExample.Migrations
                 {
                     CustomerID = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 50, nullable: false),
+                    Tfn = table.Column<string>(maxLength: 11, nullable: true),
                     Address = table.Column<string>(maxLength: 50, nullable: true),
                     City = table.Column<string>(maxLength: 40, nullable: true),
-                    PostCode = table.Column<string>(maxLength: 4, nullable: true)
+                    State = table.Column<string>(maxLength: 20, nullable: true),
+                    PostCode = table.Column<string>(maxLength: 4, nullable: true),
+                    Phone = table.Column<string>(maxLength: 15, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Customers", x => x.CustomerID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Payees",
+                columns: table => new
+                {
+                    PayeeID = table.Column<int>(nullable: false),
+                    PayeeName = table.Column<string>(maxLength: 50, nullable: false),
+                    Address = table.Column<string>(maxLength: 50, nullable: true),
+                    City = table.Column<string>(maxLength: 40, nullable: true),
+                    State = table.Column<string>(maxLength: 20, nullable: true),
+                    PostCode = table.Column<string>(maxLength: 4, nullable: true),
+                    Phone = table.Column<string>(maxLength: 15, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payees", x => x.PayeeID);
                 });
 
             migrationBuilder.CreateTable(
@@ -30,7 +49,8 @@ namespace NwbaExample.Migrations
                     AccountNumber = table.Column<int>(nullable: false),
                     AccountType = table.Column<int>(nullable: false),
                     CustomerID = table.Column<int>(nullable: false),
-                    Balance = table.Column<decimal>(type: "money", nullable: false)
+                    Balance = table.Column<decimal>(type: "money", nullable: false),
+                    ModifyDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -48,9 +68,10 @@ namespace NwbaExample.Migrations
                 name: "Logins",
                 columns: table => new
                 {
-                    LoginID = table.Column<string>(maxLength: 8, nullable: false),
-                    CustomerID = table.Column<int>(nullable: false),
-                    PasswordHash = table.Column<string>(maxLength: 64, nullable: false)
+                    LoginID = table.Column<string>(maxLength: 50, nullable: false),
+                    PasswordHash = table.Column<string>(maxLength: 64, nullable: false),
+                    ModifyDate = table.Column<DateTime>(nullable: false),
+                    CustomerID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -66,11 +87,40 @@ namespace NwbaExample.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BillPays",
+                columns: table => new
+                {
+                    BillPayID = table.Column<int>(nullable: false),
+                    AccountNumber = table.Column<int>(nullable: false),
+                    PayeeID = table.Column<int>(nullable: false),
+                    Amount = table.Column<decimal>(type: "money", nullable: false),
+                    ScheduleDate = table.Column<DateTime>(nullable: false),
+                    Period = table.Column<int>(nullable: false),
+                    ModifyDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BillPays", x => x.BillPayID);
+                    table.CheckConstraint("CH_BillPay_Amount", "Amount>0");
+                    table.ForeignKey(
+                        name: "FK_BillPays_Accounts_AccountNumber",
+                        column: x => x.AccountNumber,
+                        principalTable: "Accounts",
+                        principalColumn: "AccountNumber",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BillPays_Payees_PayeeID",
+                        column: x => x.PayeeID,
+                        principalTable: "Payees",
+                        principalColumn: "PayeeID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Transactions",
                 columns: table => new
                 {
-                    TransactionID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TransactionID = table.Column<int>(nullable: false),
                     TransactionType = table.Column<int>(nullable: false),
                     AccountNumber = table.Column<int>(nullable: false),
                     DestinationAccountNumber = table.Column<int>(nullable: true),
@@ -102,9 +152,20 @@ namespace NwbaExample.Migrations
                 column: "CustomerID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BillPays_AccountNumber",
+                table: "BillPays",
+                column: "AccountNumber");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BillPays_PayeeID",
+                table: "BillPays",
+                column: "PayeeID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Logins_CustomerID",
                 table: "Logins",
-                column: "CustomerID");
+                column: "CustomerID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transactions_AccountNumber",
@@ -120,10 +181,16 @@ namespace NwbaExample.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "BillPays");
+
+            migrationBuilder.DropTable(
                 name: "Logins");
 
             migrationBuilder.DropTable(
                 name: "Transactions");
+
+            migrationBuilder.DropTable(
+                name: "Payees");
 
             migrationBuilder.DropTable(
                 name: "Accounts");
