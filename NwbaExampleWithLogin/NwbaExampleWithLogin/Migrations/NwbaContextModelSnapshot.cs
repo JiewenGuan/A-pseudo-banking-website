@@ -187,7 +187,9 @@ namespace NwbaExampleWithLogin.Migrations
             modelBuilder.Entity("NwbaExample.Models.Transaction", b =>
                 {
                     b.Property<int>("TransactionID")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AccountNumber")
                         .HasColumnType("int");

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NwbaExampleWithLogin.Migrations
 {
-    public partial class modelUpdate : Migration
+    public partial class ModelUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -120,7 +120,8 @@ namespace NwbaExampleWithLogin.Migrations
                 name: "Transactions",
                 columns: table => new
                 {
-                    TransactionID = table.Column<int>(nullable: false),
+                    TransactionID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     TransactionType = table.Column<int>(nullable: false),
                     AccountNumber = table.Column<int>(nullable: false),
                     DestinationAccountNumber = table.Column<int>(nullable: true),

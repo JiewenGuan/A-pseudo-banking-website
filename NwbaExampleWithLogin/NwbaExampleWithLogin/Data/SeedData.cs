@@ -104,12 +104,14 @@ namespace NwbaExample.Data
             context.Payees.AddRange(
                 new Payee
                 {
+                    PayeeID = 1,
                     PayeeName = "Telstra",
                     Phone = "(61)-45632178",
                     Address = "gpo 123 melbourne"
                 },
                 new Payee
                 {
+                    PayeeID = 2,
                     PayeeName = "payee2",
                     Phone = "(61)-45632178",
                     Address = "gpo 123 melbourne"

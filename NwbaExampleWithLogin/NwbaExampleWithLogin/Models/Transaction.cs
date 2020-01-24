@@ -15,7 +15,7 @@ namespace NwbaExample.Models
 
     public class Transaction
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TransactionID { get; set; }
         [Required]
         public TransactionType TransactionType { get; set; }

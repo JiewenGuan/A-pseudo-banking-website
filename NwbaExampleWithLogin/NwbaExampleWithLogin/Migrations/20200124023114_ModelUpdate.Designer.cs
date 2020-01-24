@@ -10,8 +10,8 @@ using NwbaExample.Data;
 namespace NwbaExampleWithLogin.Migrations
 {
     [DbContext(typeof(NwbaContext))]
-    [Migration("20200123102419_modelUpdate")]
-    partial class modelUpdate
+    [Migration("20200124023114_ModelUpdate")]
+    partial class ModelUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -189,7 +189,9 @@ namespace NwbaExampleWithLogin.Migrations
             modelBuilder.Entity("NwbaExample.Models.Transaction", b =>
                 {
                     b.Property<int>("TransactionID")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AccountNumber")
                         .HasColumnType("int");
