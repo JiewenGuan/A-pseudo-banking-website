@@ -7,8 +7,8 @@ namespace NwbaExample.Models
 {
     public enum AccountType
     {
-        Checking = 1,
-        Saving = 2
+        Saving = 1,
+        Checking = 2,
     }
 
     public class Account
@@ -31,5 +31,64 @@ namespace NwbaExample.Models
 
         public virtual List<Transaction> Transactions { get; set; }
         public virtual List<BillPay> Bills { get; set; }
+
+        public bool AddTransaction(TransactionType type, Account destAccount, decimal amount, string comment)
+        {
+            decimal serviceCharge = 0m;
+            if (type == TransactionType.Deposit)
+            {
+                Credit(amount);
+            }
+            else
+            {
+                if (type == TransactionType.Withdraw)
+                {
+                    serviceCharge = 0.1m;
+                    if (!Debit(amount + serviceCharge))
+                        return false;
+                }
+                if (type == TransactionType.Transfer)
+                {
+                    serviceCharge = 0.2m;
+                    if (!Debit(amount + serviceCharge))
+                        return false;
+                    destAccount.AddTransaction(TransactionType.Deposit, null, amount,
+                        string.Format("Transfer from Account:{0}, message:{1}", AccountNumber, comment));
+                }
+                if (serviceCharge > 0)
+                    Transactions.Add(
+                        new Transaction
+                        {
+                            TransactionType = TransactionType.ServiceCharge,
+                            AccountNumber = this.AccountNumber,
+                            Account = this,
+                            Amount = serviceCharge,
+                            Comment = "Withdraw service charge",
+                            TransactionTimeUtc = DateTime.UtcNow
+                        });
+            }
+            Transactions.Add(
+                new Transaction
+                {
+                    TransactionType = type,
+                    AccountNumber = this.AccountNumber,
+                    Account = this,
+                    Amount = amount,
+                    Comment = comment,
+                    TransactionTimeUtc = DateTime.UtcNow
+                });
+            return true;
+        }
+        private void Credit(decimal amount)
+        {
+            this.Balance += amount;
+        }
+        private bool Debit(decimal amount)
+        {
+            if (Balance - (decimal)(200 * ((int)AccountType-1)) < amount)
+                return false;
+            Balance -= amount;
+            return true;
+        }
     }
 }

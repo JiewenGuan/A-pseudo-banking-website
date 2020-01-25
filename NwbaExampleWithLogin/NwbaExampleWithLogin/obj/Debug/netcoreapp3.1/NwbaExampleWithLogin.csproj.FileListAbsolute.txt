@@ -146,7 +146,6 @@ C:\2020Summer\WDT\7\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcorea
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\NwbaExampleWithLogin.csprojAssemblyReference.cache
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\staticwebassets\NwbaExampleWithLogin.StaticWebAssets.Manifest.cache
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\staticwebassets\NwbaExampleWithLogin.StaticWebAssets.xml
-C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\NwbaExampleWithLogin.MvcApplicationPartsAssemblyInfo.cache
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\NwbaExampleWithLogin.RazorAssemblyInfo.cache
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\NwbaExampleWithLogin.RazorAssemblyInfo.cs
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\NwbaExampleWithLogin.AssemblyInfoInputs.cache
@@ -433,3 +432,5 @@ C:\WDT2020\WDTA2-s3629363\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\ne
 C:\WDT2020\WDTA2-s3629363\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\NwbaExampleWithLogin.csproj.CopyComplete
 C:\WDT2020\WDTA2-s3629363\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\NwbaExampleWithLogin.dll
 C:\WDT2020\WDTA2-s3629363\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\NwbaExampleWithLogin.pdb
+C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\NwbaExampleWithLogin.MvcApplicationPartsAssemblyInfo.cache
+C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Success.cshtml.g.cs

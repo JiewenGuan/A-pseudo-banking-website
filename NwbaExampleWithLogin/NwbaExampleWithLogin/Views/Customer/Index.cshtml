@@ -1,29 +1,71 @@
-﻿@model Customer
+﻿@model TransactionViewModel
 @{
-    ViewData["Title"] = "Accounts";
+    ViewData["Title"] = "My ATM";
 }
 
 <div>
-    <h1 class="display-4">Welcome, @Model.Name</h1>
-    
-    <h3>Your Accounts</h3>
-    <table class="table">
-        <tr>
-            <th>@Html.DisplayNameFor(x => x.Accounts[0].AccountNumber)</th>
-            <th>@Html.DisplayNameFor(x => x.Accounts[0].AccountType)</th>
-            <th>@Html.DisplayNameFor(x => x.Accounts[0].Balance)</th>
-            <th></th>
-        </tr>
-        @foreach(var account in Model.Accounts) {
-            <tr>
-                <td>@Html.DisplayFor(x => account.AccountNumber)</td>
-                <td>@Html.DisplayFor(x => account.AccountType)</td>
-                <td>@Html.DisplayFor(x => account.Balance)</td>
-                <td>
-                    <a class="btn btn-primary"
-                        asp-action="Deposit" asp-route-id="@account.AccountNumber">Deposit</a>
-                </td>
-            </tr>
-        }
-    </table>
+    <h1 class="display-4">Welcome, @Model.Customer.Name</h1>
+
+    <h3>Make a Transaction</h3>
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Index">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    @* ReSharper disable once UnknownCssClass *@
+                    <label asp-for="Type" class="control-label"></label>
+                    <select asp-for="Type" asp-items="Html.GetEnumSelectList<TransactionType>().Take((int)TransactionType.Transfer)" class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    @* ReSharper disable once UnknownCssClass *@
+                    <label asp-for="FromAccount" class="control-label"></label>
+                    <select asp-for="FromAccount" class="form-control">
+                        @foreach (Account account in Model.Customer.Accounts)
+                        {
+                            <option value="@account.AccountNumber">@account.AccountType.ToString() Balence: @account.Balance</option>
+                        }
+                    </select>
+                    <span asp-validation-for="FromAccount" class="text-danger"></span>
+
+                </div>
+                <div class="form-group">
+                    @* ReSharper disable once UnknownCssClass *@
+                    <label asp-for="ToAccount" class="control-label"></label>
+                    <select asp-for="ToAccount" class="form-control">
+                        <option value="0" selected>Select an Account only for transfer</option>
+                        @foreach (Customer customer in Model.Customers)
+                        {
+                            @if (!customer.Equals(Model.Customer))
+                            {
+                                <optgroup label="@customer.Name">
+                                    @foreach (Account account in customer.Accounts)
+                                    {
+                                        <option value="@account.AccountNumber">@customer.Name.Split(' ')[0]'s @account.AccountType.ToString()</option>
+                                    }
+                                </optgroup>
+                            }
+                        }
+                    </select>
+                    <span asp-validation-for="ToAccount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    @* ReSharper disable once UnknownCssClass *@
+                    <label asp-for="Amount" class="control-label"></label>
+                    <input asp-for="Amount" class="form-control" />
+                    <span asp-validation-for="Amount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    @* ReSharper disable once UnknownCssClass *@
+                    <label asp-for="Comment" class="control-label"></label>
+                    <input asp-for="Comment" class="form-control" />
+                    <span asp-validation-for="Comment" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Confirm" class="btn btn-primary" />
+                    <a asp-action="index" class="btn btn-primary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </div>

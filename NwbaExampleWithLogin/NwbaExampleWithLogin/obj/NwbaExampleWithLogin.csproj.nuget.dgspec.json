@@ -1,21 +1,18 @@
 {
   "format": 1,
   "restore": {
-    "C:\\WDT2020\\WDTA2-s3629363\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\NwbaExampleWithLogin.csproj": {}
+    "C:\\2020Summer\\WDT\\Assignments\\A2\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\NwbaExampleWithLogin.csproj": {}
   },
   "projects": {
-    "C:\\WDT2020\\WDTA2-s3629363\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\NwbaExampleWithLogin.csproj": {
+    "C:\\2020Summer\\WDT\\Assignments\\A2\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\NwbaExampleWithLogin.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\WDT2020\\WDTA2-s3629363\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\NwbaExampleWithLogin.csproj",
+        "projectUniqueName": "C:\\2020Summer\\WDT\\Assignments\\A2\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\NwbaExampleWithLogin.csproj",
         "projectName": "NwbaExampleWithLogin",
-        "projectPath": "C:\\WDT2020\\WDTA2-s3629363\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\NwbaExampleWithLogin.csproj",
+        "projectPath": "C:\\2020Summer\\WDT\\Assignments\\A2\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\NwbaExampleWithLogin.csproj",
         "packagesPath": "C:\\Users\\heiye\\.nuget\\packages\\",
-        "outputPath": "C:\\WDT2020\\WDTA2-s3629363\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\obj\\",
+        "outputPath": "C:\\2020Summer\\WDT\\Assignments\\A2\\NwbaExampleWithLogin\\NwbaExampleWithLogin\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
           "C:\\Users\\heiye\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -54,6 +51,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[3.1.1, )"
+            },
+            "Microsoft.Extensions.Logging.Debug": {
+              "target": "Package",
+              "version": "[3.1.0, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",

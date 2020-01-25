@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NwbaExampleWithLogin.Migrations
 {
-    public partial class ModelUpdate : Migration
+    public partial class ModelFix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -10,8 +10,8 @@ using NwbaExample.Data;
 namespace NwbaExampleWithLogin.Migrations
 {
     [DbContext(typeof(NwbaContext))]
-    [Migration("20200124023114_ModelUpdate")]
-    partial class ModelUpdate
+    [Migration("20200125114037_ModelFix")]
+    partial class ModelFix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
