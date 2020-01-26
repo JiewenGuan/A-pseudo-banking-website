@@ -1,0 +1,146 @@
+﻿@model StatementViewModel
+@{
+    ViewData["Title"] = "My Statement";
+    decimal netWorth = 0;
+
+    foreach (Account account in Model.Customer.Accounts)
+        netWorth += account.Balance;
+    Account displayAccount = Model.Customer.Accounts.Find(x => x.AccountNumber == Model.AccountOption);
+}
+
+<h1>My Statement</h1>
+
+<form asp-action="Statement" method="get">
+    <div class="form-group">
+        @* ReSharper disable once UnknownCssClass *@
+        <select asp-for="AccountOption" class="form-control">
+            <option value="0" selected>Select an Account</option>
+            @foreach (Account account in Model.Customer.Accounts)
+            {
+                <option value="@account.AccountNumber">@account.AccountType.ToString() Balence: @account.Balance</option>
+            }
+        </select>
+        <span asp-validation-for="AccountOption" class="text-danger"></span>
+        <input type="submit" value="Display" class="btn btn-primary" />
+    </div>
+</form>
+@if (Model.AccountOption != 0)
+{
+    <h4>My @displayAccount.AccountType.ToString() Account No.@displayAccount.AccountNumber Balance: A$@displayAccount.Balance</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => displayAccount.Transactions[0].TransactionType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => displayAccount.Transactions[0].AccountNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => displayAccount.Transactions[0].DestinationAccountNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => displayAccount.Transactions[0].Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => displayAccount.Transactions[0].Comment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => displayAccount.Transactions[0].TransactionTimeUtc)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Page)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TransactionType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccountNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DestinationAccountNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comment)
+                    </td>
+                    <td>
+                        @DateTime.SpecifyKind(item.TransactionTimeUtc, DateTimeKind.Utc).ToLocalTime();
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.PagedListPager(Model.Page, page => Url.Action("Statement", new { page, AccountOption = Model.AccountOption }),
+            new PagedListRenderOptions
+            {
+                LiElementClasses = new[] { "page-item" },
+                PageClasses = new[] { "page-link" }
+            })
+    <hr />
+}
+
+
+<div>
+    <h4>My Details</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.Tfn)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer.Tfn)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.City)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer.City)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.State)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer.State)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.PostCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer.PostCode)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Customer.Phone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Customer.Phone)
+        </dd>
+        <dt class="col-sm-2">
+            Net Worth:
+        </dt>
+        <dd class="col-sm-10">
+            A$@netWorth.ToString("0.00")
+        </dd>
+    </dl>
+</div>
+
+
+

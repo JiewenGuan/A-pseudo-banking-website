@@ -63,7 +63,7 @@ namespace NwbaExample.Models
                             AccountNumber = this.AccountNumber,
                             Account = this,
                             Amount = serviceCharge,
-                            Comment = "Withdraw service charge",
+                            Comment = string.Format("{0} service charge",type.ToString()),
                             TransactionTimeUtc = DateTime.UtcNow
                         });
             }

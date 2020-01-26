@@ -18,12 +18,15 @@ namespace NwbaExample.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TransactionID { get; set; }
         [Required]
+        [Display(Name = "Transaction Type")]
         public TransactionType TransactionType { get; set; }
         [Required]
+        [Display(Name = "Account Number")]
         public int AccountNumber { get; set; }
         public virtual Account Account { get; set; }
 
         [ForeignKey("DestinationAccount")]
+        [Display(Name = "Destination Account Number")]
         public int? DestinationAccountNumber { get; set; }
         public virtual Account DestinationAccount { get; set; }
 
@@ -33,6 +36,7 @@ namespace NwbaExample.Models
         [StringLength(255)]
         public string Comment { get; set; }
         [Required]
+        [Display(Name = "Transaction Time")]
         public DateTime TransactionTimeUtc { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NwbaExample.Data;
@@ -8,7 +9,8 @@ using NwbaExample.Utilities;
 using NwbaExampleWithLogin.Attributes;
 using NwbaExample.ViewModels;
 using System.Linq;
-using Microsoft.Extensions.Primitives;
+using X.PagedList;
+
 
 namespace NwbaExample.Controllers
 {
@@ -92,11 +94,14 @@ namespace NwbaExample.Controllers
         [HttpPost]
         public async Task<IActionResult> Profile(string name, string tfn, string address, string city, string state, string postCode, string phone)
         {
+            Regex rgx = new Regex(@"^\(61\)-[1-9]{8}$");
             Customer retCustomer = await _context.Customers.FindAsync(CustomerID);
             if (string.IsNullOrEmpty(name))
                 ModelState.AddModelError(nameof(name), "Arya? Is that you?");
             if (string.IsNullOrEmpty(phone))
                 ModelState.AddModelError(nameof(phone), "Get a Number!");
+            if (!rgx.IsMatch(phone))
+                ModelState.AddModelError(nameof(phone), "Invalid Phone Number");
             if (!ModelState.IsValid)
                 return View(retCustomer);
             retCustomer.Update( name,  tfn,  address,  city,  state,  postCode,  phone);
@@ -137,6 +142,21 @@ namespace NwbaExample.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> Statement(int accountOption = 0, int page = 1)
+        {
+            Customer retCustomer = await _context.Customers.FindAsync(CustomerID);
+            IPagedList<Transaction> transactionList = null;
+            if (accountOption != 0)
+                transactionList = await retCustomer.Accounts.Find(x => x.AccountNumber == accountOption).Transactions.ToPagedListAsync(page, 4);
+            StatementViewModel ret = new StatementViewModel
+            {
+                Customer = retCustomer,
+                AccountOption = accountOption,
+                Page = transactionList
+            };
+
+            return View(ret);
         }
     }
 }

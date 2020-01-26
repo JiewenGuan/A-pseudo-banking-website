@@ -33,8 +33,29 @@ using NwbaExample.ViewModels;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 4 "C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\Views\_ViewImports.cshtml"
+using X.PagedList;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\Views\_ViewImports.cshtml"
+using X.PagedList.Mvc.Core;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\Views\_ViewImports.cshtml"
+using X.PagedList.Mvc.Core.Common;
+
+#line default
+#line hidden
+#nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7091c65830b0329e613be026ede8a57552863778", @"/Views/_ViewStart.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7dc21819846a537d63570e282e27d9d843bacf45", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1b6a23a9ad7f0da21988488ab669df301eaaf802", @"/Views/_ViewImports.cshtml")]
     public class Views__ViewStart : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998
