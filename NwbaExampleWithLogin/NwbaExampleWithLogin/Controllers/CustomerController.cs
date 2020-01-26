@@ -8,6 +8,7 @@ using NwbaExample.Utilities;
 using NwbaExampleWithLogin.Attributes;
 using NwbaExample.ViewModels;
 using System.Linq;
+using Microsoft.Extensions.Primitives;
 
 namespace NwbaExample.Controllers
 {
@@ -58,17 +59,25 @@ namespace NwbaExample.Controllers
                 return View(retVM);
 
             Account destAccount = null;
-            if (type == TransactionType.Transfer && toAccount != 0)
-                destAccount = await _context.Accounts.FindAsync(toAccount);
-            var account = await _context.Accounts.FindAsync(fromAccount);
-            if (account.AddTransaction(type, destAccount, amount, comment))
+            try
             {
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Success), new { message = type.ToString() });
+                if (type == TransactionType.Transfer && toAccount != 0)
+                    destAccount = await _context.Accounts.FindAsync(toAccount);
+                var account = await _context.Accounts.FindAsync(fromAccount);
+                if (account.AddTransaction(type, destAccount, amount, comment))
+                {
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Success), new { message = type.ToString() });
+                }
+                else
+                {
+                    ModelState.AddModelError(nameof(amount), string.Format("Insufficient funds, {0} failed", type.ToString()));
+                    return View(retVM);
+                }
             }
-            else
+            catch(NullReferenceException e)
             {
-                ModelState.AddModelError(nameof(amount), "Insufficient funds, transfer failed");
+                ModelState.AddModelError(nameof(type), string.Format("{0}, Stop Hacking the webpage!", e.Message));
                 return View(retVM);
             }
         }
@@ -77,6 +86,26 @@ namespace NwbaExample.Controllers
             ViewData["Message"] = message;
             return View();
         }
+
+        public async Task<IActionResult> Profile() => View(await _context.Customers.FindAsync(CustomerID));
+
+        [HttpPost]
+        public async Task<IActionResult> Profile(string name, string tfn, string address, string city, string state, string postCode, string phone)
+        {
+            Customer retCustomer = await _context.Customers.FindAsync(CustomerID);
+            if (string.IsNullOrEmpty(name))
+                ModelState.AddModelError(nameof(name), "Arya? Is that you?");
+            if (string.IsNullOrEmpty(phone))
+                ModelState.AddModelError(nameof(phone), "Get a Number!");
+            if (!ModelState.IsValid)
+                return View(retCustomer);
+            retCustomer.Update( name,  tfn,  address,  city,  state,  postCode,  phone);
+            HttpContext.Session.SetString(nameof(Customer.Name), name);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Success), new { message = "Update" });
+        }
+
+
 
         public async Task<IActionResult> Deposit(int id) => View(await _context.Accounts.FindAsync(id));
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -12,7 +13,7 @@ namespace NwbaExample.Models
         [Required, StringLength(50)]
         public string Name { get; set; }
 
-        [StringLength(11)]
+        [StringLength(11), Display(Name = "Tax File Number")]
         public string Tfn { get; set; }
 
         [StringLength(50)]
@@ -24,7 +25,7 @@ namespace NwbaExample.Models
         [StringLength(20)]
         public string State { get; set; }
 
-        [StringLength(4)]
+        [StringLength(4), Display(Name = "Post Code")]
         public string PostCode { get; set; }
         
         [Required, StringLength(15),RegularExpression("^(61)-[1-9]{8}$")]
@@ -32,5 +33,16 @@ namespace NwbaExample.Models
         //Nav
         public virtual List<Account> Accounts { get; set; }
         public virtual Login Login { get; set; }
+
+        public void Update(string name, string tfn, string address, string city, string state, string postCode, string phone)
+        {
+            Name = name;
+            Tfn = tfn;
+            Address = address;
+            City = city;
+            State = state;
+            PostCode = postCode;
+            Phone = phone;
+        }
     }
 }
