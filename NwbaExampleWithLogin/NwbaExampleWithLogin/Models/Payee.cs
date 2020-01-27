@@ -28,6 +28,6 @@ namespace NwbaExample.Models
 
         [Required, StringLength(15), RegularExpression("^(61)-[1-9]{8}$")]
         public string Phone { get; set; }
-        public virtual List<BillPay> Bills { get; set; }
+        public virtual List<Bill> Bills { get; set; }
     }
 }

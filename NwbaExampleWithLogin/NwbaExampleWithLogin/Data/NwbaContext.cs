@@ -13,7 +13,7 @@ namespace NwbaExample.Data
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Payee> Payees { get;set;}
-        public DbSet<BillPay> BillPays {get;set;}
+        public DbSet<Bill> Bills {get;set;}
 
 protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -23,11 +23,11 @@ protected override void OnModelCreating(ModelBuilder builder)
                 .WithOne(l => l.Customer).HasForeignKey<Login>(l => l.CustomerID);
             builder.Entity<Account>().HasOne<Customer>(a => a.Customer)
                 .WithMany(c => c.Accounts).HasForeignKey(a => a.CustomerID);
-            builder.Entity<BillPay>().HasOne<Account>(b => b.Account).WithMany(a => a.Bills)
+            builder.Entity<Bill>().HasOne<Account>(b => b.Account).WithMany(a => a.Bills)
                 .HasForeignKey(b => b.AccountNumber);
-            builder.Entity<BillPay>().HasOne<Payee>(b => b.Payee)
+            builder.Entity<Bill>().HasOne<Payee>(b => b.Payee)
                 .WithMany(p => p.Bills).HasForeignKey(b => b.PayeeID);
-            builder.Entity<BillPay>().HasCheckConstraint("CH_BillPay_Amount", "Amount>0");
+            builder.Entity<Bill>().HasCheckConstraint("CH_BillPay_Amount", "Amount>0");
 
             builder.Entity<Login>().HasCheckConstraint("CH_Login_LoginID", "len(LoginID) = 8").
                 HasCheckConstraint("CH_Login_PasswordHash", "len(PasswordHash) = 64");

@@ -1,0 +1,68 @@
+﻿@model BillViewModel
+
+@{
+    ViewData["Title"] = "Edit Bill";
+}
+
+<h1>Edit Bill</h1>
+
+<h4>Bill</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BillID" />
+            <div class="form-group">
+                @* ReSharper disable once UnknownCssClass *@
+                <label asp-for="FromAccount" class="control-label"></label>
+                <select asp-for="FromAccount" class="form-control">
+                    @foreach (Account account in Model.Customer.Accounts)
+                    {
+                        <option value="@account.AccountNumber">@account.AccountType.ToString() Balence: @account.Balance</option>
+                    }
+                </select>
+                <span asp-validation-for="FromAccount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @* ReSharper disable once UnknownCssClass *@
+                <label asp-for="ToPayee" class="control-label"></label>
+                <select asp-for="ToPayee" class="form-control">
+                    <option value="@Model.ToPayee.PayeeID" selected>@Model.ToPayee.PayeeName</option>
+                    @foreach (Payee payee in Model.Payees)
+                    {
+                        @if (payee != Model.ToPayee)
+                        {
+                            <option value="@payee.PayeeID">@payee.PayeeName</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="ToPayee" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ScheduleDate" class="control-label"></label>
+                <input asp-for="ScheduleDate" class="form-control" />
+                <span asp-validation-for="ScheduleDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Period" class="control-label"></label>
+                <select asp-for="Period" asp-items="Html.GetEnumSelectList<BillPeriod>()" class="form-control"></select>
+                <span asp-validation-for="Period" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Delete" asp-route-id="@Model.BillID" class="btn btn-primary">Delete</a>
+                <a asp-action="Index" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+

@@ -10,8 +10,8 @@ using NwbaExample.Data;
 namespace NwbaExampleWithLogin.Migrations
 {
     [DbContext(typeof(NwbaContext))]
-    [Migration("20200125114037_ModelFix")]
-    partial class ModelFix
+    [Migration("20200127051434_NewMigration")]
+    partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,10 +47,12 @@ namespace NwbaExampleWithLogin.Migrations
                     b.HasCheckConstraint("CH_Account_Balance", "Balance >= 0");
                 });
 
-            modelBuilder.Entity("NwbaExample.Models.BillPay", b =>
+            modelBuilder.Entity("NwbaExample.Models.Bill", b =>
                 {
-                    b.Property<int>("BillPayID")
-                        .HasColumnType("int");
+                    b.Property<int>("BillID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AccountNumber")
                         .HasColumnType("int");
@@ -70,13 +72,13 @@ namespace NwbaExampleWithLogin.Migrations
                     b.Property<DateTime>("ScheduleDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("BillPayID");
+                    b.HasKey("BillID");
 
                     b.HasIndex("AccountNumber");
 
                     b.HasIndex("PayeeID");
 
-                    b.ToTable("BillPays");
+                    b.ToTable("Bills");
 
                     b.HasCheckConstraint("CH_BillPay_Amount", "Amount>0");
                 });
@@ -232,7 +234,7 @@ namespace NwbaExampleWithLogin.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("NwbaExample.Models.BillPay", b =>
+            modelBuilder.Entity("NwbaExample.Models.Bill", b =>
                 {
                     b.HasOne("NwbaExample.Models.Account", "Account")
                         .WithMany("Bills")

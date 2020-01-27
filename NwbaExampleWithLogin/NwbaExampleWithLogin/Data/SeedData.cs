@@ -112,7 +112,21 @@ namespace NwbaExample.Data
                 new Payee
                 {
                     PayeeID = 2,
-                    PayeeName = "payee2",
+                    PayeeName = "Rmit",
+                    Phone = "(61)-45632178",
+                    Address = "gpo 123 melbourne"
+                },
+                new Payee
+                {
+                    PayeeID = 3,
+                    PayeeName = "Rent",
+                    Phone = "(61)-45632178",
+                    Address = "gpo 123 melbourne"
+                },
+                new Payee
+                {
+                    PayeeID = 4,
+                    PayeeName = "Gas",
                     Phone = "(61)-45632178",
                     Address = "gpo 123 melbourne"
                 }

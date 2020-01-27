@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NwbaExampleWithLogin.Migrations
 {
-    public partial class ModelFix : Migration
+    public partial class NewMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -87,10 +87,11 @@ namespace NwbaExampleWithLogin.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BillPays",
+                name: "Bills",
                 columns: table => new
                 {
-                    BillPayID = table.Column<int>(nullable: false),
+                    BillID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     AccountNumber = table.Column<int>(nullable: false),
                     PayeeID = table.Column<int>(nullable: false),
                     Amount = table.Column<decimal>(type: "money", nullable: false),
@@ -100,16 +101,16 @@ namespace NwbaExampleWithLogin.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BillPays", x => x.BillPayID);
+                    table.PrimaryKey("PK_Bills", x => x.BillID);
                     table.CheckConstraint("CH_BillPay_Amount", "Amount>0");
                     table.ForeignKey(
-                        name: "FK_BillPays_Accounts_AccountNumber",
+                        name: "FK_Bills_Accounts_AccountNumber",
                         column: x => x.AccountNumber,
                         principalTable: "Accounts",
                         principalColumn: "AccountNumber",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BillPays_Payees_PayeeID",
+                        name: "FK_Bills_Payees_PayeeID",
                         column: x => x.PayeeID,
                         principalTable: "Payees",
                         principalColumn: "PayeeID",
@@ -153,13 +154,13 @@ namespace NwbaExampleWithLogin.Migrations
                 column: "CustomerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BillPays_AccountNumber",
-                table: "BillPays",
+                name: "IX_Bills_AccountNumber",
+                table: "Bills",
                 column: "AccountNumber");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BillPays_PayeeID",
-                table: "BillPays",
+                name: "IX_Bills_PayeeID",
+                table: "Bills",
                 column: "PayeeID");
 
             migrationBuilder.CreateIndex(
@@ -182,7 +183,7 @@ namespace NwbaExampleWithLogin.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "BillPays");
+                name: "Bills");
 
             migrationBuilder.DropTable(
                 name: "Logins");

@@ -30,7 +30,7 @@ namespace NwbaExample.Models
         public DateTime ModifyDate { get; set; }
 
         public virtual List<Transaction> Transactions { get; set; }
-        public virtual List<BillPay> Bills { get; set; }
+        public virtual List<Bill> Bills { get; set; }
 
         public bool AddTransaction(TransactionType type, Account destAccount, decimal amount, string comment)
         {
@@ -63,7 +63,7 @@ namespace NwbaExample.Models
                             AccountNumber = this.AccountNumber,
                             Account = this,
                             Amount = serviceCharge,
-                            Comment = string.Format("{0} service charge",type.ToString()),
+                            Comment = string.Format("{0} service charge", type.ToString()),
                             TransactionTimeUtc = DateTime.UtcNow
                         });
             }
@@ -79,13 +79,31 @@ namespace NwbaExample.Models
                 });
             return true;
         }
+
+        public void AddBill(BillPeriod period, Payee payee, decimal amount, DateTime scheduleDate)
+        {
+            Bill bill = new Bill
+            {
+                AccountNumber = this.AccountNumber,
+                Account = this,
+                PayeeID = payee.PayeeID,
+                Payee = payee,
+                Amount = amount,
+                ScheduleDate = scheduleDate.Date,
+                Period = period,
+                ModifyDate = DateTime.Now
+            };
+            Bills.Add(bill);
+            payee.Bills.Add(bill);
+        }
+
         private void Credit(decimal amount)
         {
             this.Balance += amount;
         }
         private bool Debit(decimal amount)
         {
-            if (Balance - (decimal)(200 * ((int)AccountType-1)) < amount)
+            if (Balance - (decimal)(200 * ((int)AccountType - 1)) < amount)
                 return false;
             Balance -= amount;
             return true;

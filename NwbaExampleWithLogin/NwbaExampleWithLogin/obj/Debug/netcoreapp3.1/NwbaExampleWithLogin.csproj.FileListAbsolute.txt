@@ -455,7 +455,6 @@ C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\bin\D
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Statement.cshtml.g.cs
-C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Customer\cutconner.cshtml.g.cs
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Debug.dll
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
@@ -466,3 +465,8 @@ C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\bin\D
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Security.Cryptography.Pkcs.dll
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\NwbaExampleWithLogin.MvcApplicationPartsAssemblyInfo.cs
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\NwbaExampleWithLogin.MvcApplicationPartsAssemblyInfo.cache
+C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Bill\Index.cshtml.g.cs
+C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Bill\Create.cshtml.g.cs
+C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Bill\Success.cshtml.g.cs
+C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Bill\Edit.cshtml.g.cs
+C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Bill\Delete.cshtml.g.cs
