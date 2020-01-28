@@ -39,7 +39,7 @@ namespace NwbaExample.Controllers
                 {
                     Customer = await _context.Customers.FindAsync(CustomerID),
                     Payees = _context.Payees.OrderBy(x => x.PayeeID).ToList(),
-                    ScheduleDate = DateTime.Today
+                    ScheduleDate = DateTime.Now
                 });
         }
         [HttpPost]
@@ -49,7 +49,7 @@ namespace NwbaExample.Controllers
             {
                 Customer = await _context.Customers.FindAsync(CustomerID),
                 Payees = _context.Payees.OrderBy(x => x.PayeeID).ToList(),
-                ScheduleDate = DateTime.Today
+                ScheduleDate = DateTime.Now
             };
             Account account = await _context.Accounts.FindAsync(fromAccount);
             Payee payee = await _context.Payees.FindAsync(toPayee);
@@ -61,7 +61,7 @@ namespace NwbaExample.Controllers
                 ModelState.AddModelError(nameof(amount), "Amount must be positive.");
             if (amount.HasMoreThanTwoDecimalPlaces())
                 ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
-            if (scheduleDate.Date < DateTime.Today)
+            if (scheduleDate < DateTime.Now)
                 ModelState.AddModelError(nameof(scheduleDate), "Cannot go back in time.");
             if (!ModelState.IsValid)
                 return View(retVM);
@@ -85,7 +85,7 @@ namespace NwbaExample.Controllers
                     ToPayee = bill.Payee,
                     Amount = bill.Amount,
                     Period = bill.Period,
-                    ScheduleDate = bill.ScheduleDate.Date
+                    ScheduleDate = bill.ScheduleDate
                 });
         }
         [HttpPost]
@@ -105,7 +105,7 @@ namespace NwbaExample.Controllers
                 ModelState.AddModelError(nameof(amount), "Amount must be positive.");
             if (amount.HasMoreThanTwoDecimalPlaces())
                 ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
-            if (scheduleDate.Date < DateTime.Today)
+            if (scheduleDate < DateTime.Now)
                 ModelState.AddModelError(nameof(scheduleDate), "Cannot go back in time.");
             BillViewModel retVM = new BillViewModel
             {
@@ -115,7 +115,7 @@ namespace NwbaExample.Controllers
                 ToPayee = payee,
                 Amount = amount,
                 Period = period,
-                ScheduleDate = scheduleDate.Date
+                ScheduleDate = scheduleDate
             };
             if (!ModelState.IsValid)
                 return View(retVM);

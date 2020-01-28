@@ -20,7 +20,7 @@ namespace NwbaExample.Utilities
         {
             foreach (Bill bill in _context.Bills)
             {
-                if (bill.Status == BillStatus.Active && bill.ScheduleDate.Date == DateTime.Today)
+                if (bill.Status == BillStatus.Active && bill.ScheduleDate < DateTime.Now)
                 {
                     bill.Exicute();
                     

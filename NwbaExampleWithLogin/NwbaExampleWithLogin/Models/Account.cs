@@ -43,13 +43,13 @@ namespace NwbaExample.Models
             {
                 if (type == TransactionType.Withdraw)
                 {
-                    serviceCharge = 0.1m;
+                    serviceCharge = GetServiceCharge(type);
                     if (!Debit(amount + serviceCharge))
                         return false;
                 }
                 if (type == TransactionType.Transfer)
                 {
-                    serviceCharge = 0.2m;
+                    serviceCharge = GetServiceCharge(type);
                     if (!Debit(amount + serviceCharge))
                         return false;
                     destAccount.AddTransaction(TransactionType.Deposit, null, amount,
@@ -94,7 +94,7 @@ namespace NwbaExample.Models
                 PayeeID = payee.PayeeID,
                 Payee = payee,
                 Amount = amount,
-                ScheduleDate = scheduleDate.Date,
+                ScheduleDate = scheduleDate,
                 Period = period,
                 ModifyDate = DateTime.Now,
                 Status = BillStatus.Active
@@ -113,6 +113,20 @@ namespace NwbaExample.Models
                 return false;
             Balance -= amount;
             return true;
+        }
+        private decimal GetServiceCharge(TransactionType type)
+        {
+            int freeTransaction = 4;
+            foreach (Transaction transaction in Transactions)
+                if (transaction.TransactionType == TransactionType.Transfer || transaction.TransactionType == TransactionType.Withdraw)
+                    freeTransaction -= 1;
+            if (freeTransaction > 0)
+                return 0;
+            if (type == TransactionType.Withdraw)
+                return 0.1m;
+            if (type == TransactionType.Transfer)
+                return 0.2m;
+            return -1;
         }
     }
 }

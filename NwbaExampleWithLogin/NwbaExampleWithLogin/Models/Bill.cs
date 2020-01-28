@@ -63,7 +63,6 @@ namespace NwbaExample.Models
         [Column(TypeName = "money")]
         public decimal Amount { get; set; }
         [Required]
-        [DataType(DataType.Date)]
         [Display(Name = "Schedule Date")]
         public DateTime ScheduleDate { get; set; }
         [Required]
@@ -71,6 +70,7 @@ namespace NwbaExample.Models
         [Required]
         public BillStatus Status { get; set; }
         [Required]
+        [Display(Name = "Modify Date")]
         public DateTime ModifyDate { get; set; }
 
         public void Update(BillPeriod period, Account account, Payee payee, decimal amount, DateTime scheduleDate)

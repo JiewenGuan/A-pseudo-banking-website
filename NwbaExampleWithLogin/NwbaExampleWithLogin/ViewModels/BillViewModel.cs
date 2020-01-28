@@ -20,7 +20,6 @@ namespace NwbaExample.ViewModels
         public decimal Amount { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
         [Display(Name = "Schedule Date")]
         public DateTime ScheduleDate { get; set; }
         public BillPeriod Period { get; set; }
