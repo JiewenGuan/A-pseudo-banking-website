@@ -55,6 +55,11 @@ namespace NwbaExample.Models
                     destAccount.AddTransaction(TransactionType.Deposit, null, amount,
                         string.Format("Transfer from Account:{0}, message:{1}", AccountNumber, comment));
                 }
+                if(type == TransactionType.BillPay)
+                {
+                    if (!Debit(amount + serviceCharge))
+                        return false;
+                }
                 if (serviceCharge > 0)
                     Transactions.Add(
                         new Transaction
@@ -91,7 +96,8 @@ namespace NwbaExample.Models
                 Amount = amount,
                 ScheduleDate = scheduleDate.Date,
                 Period = period,
-                ModifyDate = DateTime.Now
+                ModifyDate = DateTime.Now,
+                Status = BillStatus.Active
             };
             Bills.Add(bill);
             payee.Bills.Add(bill);

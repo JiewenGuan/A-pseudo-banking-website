@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NwbaExampleWithLogin.Migrations
 {
-    public partial class NewMigration : Migration
+    public partial class BillFix : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -97,6 +97,7 @@ namespace NwbaExampleWithLogin.Migrations
                     Amount = table.Column<decimal>(type: "money", nullable: false),
                     ScheduleDate = table.Column<DateTime>(nullable: false),
                     Period = table.Column<int>(nullable: false),
+                    Status = table.Column<int>(nullable: false),
                     ModifyDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

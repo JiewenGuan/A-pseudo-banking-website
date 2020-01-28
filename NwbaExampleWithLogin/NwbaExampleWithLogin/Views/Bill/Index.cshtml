@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                Bill Status
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Account)
             </th>
             <th>
@@ -38,6 +41,9 @@
         {
             <tr>
                 <td>
+                    @item.Status.ToString().ToUpper()
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Account.AccountNumber)
                 </td>
                 <td>
@@ -56,10 +62,13 @@
                     @Html.DisplayFor(modelItem => item.ModifyDate)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.BillID" class="btn btn-primary">Edit</a>  
-                    <a asp-action="Delete" asp-route-id="@item.BillID" class="btn btn-primary">Delete</a>
-                </td>
-            </tr>
-        }
+                    @if (item.Status != BillStatus.Deactivated)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.BillID" class="btn btn-primary">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.BillID" class="btn btn-primary">Delete</a>
+                    }
+            </td>
+        </tr>
+    }
     </tbody>
 </table>

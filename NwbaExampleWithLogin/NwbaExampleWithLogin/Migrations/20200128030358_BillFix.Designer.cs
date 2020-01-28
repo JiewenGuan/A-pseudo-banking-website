@@ -10,8 +10,8 @@ using NwbaExample.Data;
 namespace NwbaExampleWithLogin.Migrations
 {
     [DbContext(typeof(NwbaContext))]
-    [Migration("20200127051434_NewMigration")]
-    partial class NewMigration
+    [Migration("20200128030358_BillFix")]
+    partial class BillFix
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,6 +71,9 @@ namespace NwbaExampleWithLogin.Migrations
 
                     b.Property<DateTime>("ScheduleDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("BillID");
 

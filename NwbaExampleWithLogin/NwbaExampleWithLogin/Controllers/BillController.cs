@@ -29,7 +29,7 @@ namespace NwbaExample.Controllers
             foreach (Account account in customer.Accounts)
                 bills.AddRange(account.Bills);
 
-            return View(bills);
+            return View(bills.OrderBy(x=>x.Status));
         }
 
         public async Task<IActionResult> Create()
@@ -146,8 +146,9 @@ namespace NwbaExample.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var movie = await _context.Bills.FindAsync(id);
-            _context.Bills.Remove(movie);
+            var bill = await _context.Bills.FindAsync(id);
+            if (bill != null)
+                bill.Deactivate();
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
