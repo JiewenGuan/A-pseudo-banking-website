@@ -38,7 +38,7 @@ namespace NwbaExample
             {
                 while (true)
                 {
-                    Console.WriteLine("exicuteing bills {0}", DateTime.Now);
+                    //Console.WriteLine("exicuteing bills {0}", DateTime.Now);
                     exicuter.ExicuteBill();
                     Thread.Sleep(60000);
                 }

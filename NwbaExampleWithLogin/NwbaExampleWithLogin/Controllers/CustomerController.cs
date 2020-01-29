@@ -57,6 +57,10 @@ namespace NwbaExample.Controllers
                 ModelState.AddModelError(nameof(amount), "Amount must be positive.");
             if (amount.HasMoreThanTwoDecimalPlaces())
                 ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
+            if (!string.IsNullOrEmpty(comment) && comment.Length > 254)
+                ModelState.AddModelError(nameof(comment), "Comment too long!");
+            if (fromAccount == toAccount)
+                ModelState.AddModelError(nameof(toAccount), "Transfer to a different account.");
             if (!ModelState.IsValid)
                 return View(retVM);
 
@@ -100,6 +104,8 @@ namespace NwbaExample.Controllers
                 ModelState.AddModelError(nameof(name), "Arya? Is that you?");
             if (string.IsNullOrEmpty(phone))
                 ModelState.AddModelError(nameof(phone), "Get a Number!");
+            if (!string.IsNullOrEmpty(tfn) && tfn.Length != 11)
+                ModelState.AddModelError(nameof(tfn), "TFN invalid");
             if (!rgx.IsMatch(phone))
                 ModelState.AddModelError(nameof(phone), "Invalid Phone Number");
             if (!ModelState.IsValid)
@@ -110,39 +116,6 @@ namespace NwbaExample.Controllers
             return RedirectToAction(nameof(Success), new { message = "Update" });
         }
 
-
-
-        public async Task<IActionResult> Deposit(int id) => View(await _context.Accounts.FindAsync(id));
-
-        [HttpPost]
-        public async Task<IActionResult> Deposit(int id, decimal amount)
-        {
-            var account = await _context.Accounts.FindAsync(id);
-
-            if (amount <= 0)
-                ModelState.AddModelError(nameof(amount), "Amount must be positive.");
-            if (amount.HasMoreThanTwoDecimalPlaces())
-                ModelState.AddModelError(nameof(amount), "Amount cannot have more than 2 decimal places.");
-            if (!ModelState.IsValid)
-            {
-                ViewBag.Amount = amount;
-                return View(account);
-            }
-
-            // Note this code could be moved out of the controller, e.g., into the Model.
-            account.Balance += amount;
-            account.Transactions.Add(
-                new Transaction
-                {
-                    TransactionType = TransactionType.Deposit,
-                    Amount = amount,
-                    TransactionTimeUtc = DateTime.UtcNow
-                });
-
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Index));
-        }
         public async Task<IActionResult> Statement(int accountOption = 0, int page = 1)
         {
             Customer retCustomer = await _context.Customers.FindAsync(CustomerID);
@@ -157,6 +130,21 @@ namespace NwbaExample.Controllers
             };
 
             return View(ret);
+        }
+        public IActionResult Password() => View(new TransactionViewModel { Comment = ""});
+
+        [HttpPost]
+        public async Task<IActionResult> Password(string comment)
+        {
+            if (string.IsNullOrEmpty(comment) || comment.Length < 6)
+                ModelState.AddModelError(nameof(comment), "Password too short.");
+            if (string.IsNullOrEmpty(comment) || comment.Length > 50)
+                ModelState.AddModelError(nameof(comment), "Password too Long.");
+            if (!ModelState.IsValid)
+                return View(new TransactionViewModel { Comment = "" });
+            _context.Logins.First(x => x.CustomerID == CustomerID).NewPassword(comment);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Success), new { message = "Update password" });
         }
     }
 }

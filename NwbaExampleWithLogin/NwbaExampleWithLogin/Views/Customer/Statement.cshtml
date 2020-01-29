@@ -17,7 +17,7 @@
             <option value="0" selected>Select an Account</option>
             @foreach (Account account in Model.Customer.Accounts)
             {
-                <option value="@account.AccountNumber">@account.AccountType.ToString() Balence: @account.Balance</option>
+                <option value="@account.AccountNumber">@account.AccountType.ToString() Balence: @account.Balance.ToString("0.00")</option>
             }
         </select>
         <span asp-validation-for="AccountOption" class="text-danger"></span>
@@ -26,7 +26,7 @@
 </form>
 @if (Model.AccountOption != 0)
 {
-    <h4>My @displayAccount.AccountType.ToString() Account No.@displayAccount.AccountNumber Balance: A$@displayAccount.Balance</h4>
+    <h4>My @displayAccount.AccountType.ToString() Account No.@displayAccount.AccountNumber Balance: A$@displayAccount.Balance.ToString("0.00")</h4>
     <table class="table">
         <thead>
             <tr>
@@ -65,13 +65,13 @@
                         @Html.DisplayFor(modelItem => item.DestinationAccountNumber)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Amount)
+                        A$@Html.DisplayFor(modelItem => item.Amount)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Comment)
                     </td>
                     <td>
-                        @DateTime.SpecifyKind(item.TransactionTimeUtc, DateTimeKind.Utc).ToLocalTime();
+                        @DateTime.SpecifyKind(item.TransactionTimeUtc, DateTimeKind.Utc).ToLocalTime()
                     </td>
                 </tr>
             }

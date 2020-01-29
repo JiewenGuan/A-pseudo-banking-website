@@ -273,7 +273,6 @@ C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\bin\D
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\NwbaExampleWithLogin.TagHelpers.input.cache
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\NwbaExampleWithLogin.TagHelpers.output.cache
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\NwbaExampleWithLogin.RazorCoreGenerate.cache
-C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Deposit.cshtml.g.cs
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Index.cshtml.g.cs
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
@@ -470,3 +469,4 @@ C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\D
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Bill\Success.cshtml.g.cs
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Bill\Edit.cshtml.g.cs
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Bill\Delete.cshtml.g.cs
+C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Password.cshtml.g.cs

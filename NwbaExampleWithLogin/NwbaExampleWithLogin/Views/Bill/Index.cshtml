@@ -4,11 +4,7 @@
     ViewData["Title"] = "My Bills";
 }
 
-<h1>My Bills</h1>
-
-<p>
-    <a asp-action="Create" class="btn btn-primary">Add a Bill</a>
-</p>
+<h1>My Bills <a asp-action="Create" class="btn btn-primary">Add a Bill</a></h1>
 <table class="table">
     <thead>
         <tr>
@@ -50,7 +46,7 @@
                     @Html.DisplayFor(modelItem => item.Payee.PayeeName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
+                    A$@Html.DisplayFor(modelItem => item.Amount)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ScheduleDate)

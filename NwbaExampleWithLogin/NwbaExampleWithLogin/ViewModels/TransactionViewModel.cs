@@ -16,7 +16,9 @@ namespace NwbaExample.ViewModels
         [Required]
         public TransactionType Type { get; set; }
         [Required]
+        [Display(Name = "Account")]
         public Account FromAccount { get; set; }
+        [Display(Name = "Transfer to")]
         public Account ToAccount { get; set; }
         [Required]
         public decimal Amount { get; set; }

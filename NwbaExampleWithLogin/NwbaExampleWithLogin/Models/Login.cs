@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleHashing;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace NwbaExample.Models
@@ -16,5 +17,10 @@ namespace NwbaExample.Models
         public int CustomerID { get; set; }
         //Nav
         public virtual Customer Customer { get; set; }
+
+        public void NewPassword(string comment)
+        {
+            PasswordHash = PBKDF2.Hash(comment);
+        }
     }
 }

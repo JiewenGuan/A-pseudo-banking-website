@@ -83,6 +83,7 @@ namespace NwbaExample.Models
             Amount = amount;
             ScheduleDate = scheduleDate;
             ModifyDate = DateTime.Now;
+            Status = BillStatus.Active;
         }
         public void Deactivate()
         {

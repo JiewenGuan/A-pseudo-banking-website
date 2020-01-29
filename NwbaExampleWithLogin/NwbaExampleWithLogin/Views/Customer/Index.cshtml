@@ -23,7 +23,7 @@
                     <select asp-for="FromAccount" class="form-control">
                         @foreach (Account account in Model.Customer.Accounts)
                         {
-                            <option value="@account.AccountNumber">@account.AccountType.ToString() Balence: @account.Balance</option>
+                            <option value="@account.AccountNumber">@account.AccountType.ToString() Balence: @account.Balance.ToString("0.00")</option>
                         }
                     </select>
                     <span asp-validation-for="FromAccount" class="text-danger"></span>
@@ -36,15 +36,14 @@
                         <option value="0" selected>Select an Account only for transfer</option>
                         @foreach (Customer customer in Model.Customers)
                         {
-                            @if (!customer.Equals(Model.Customer))
-                            {
-                                <optgroup label="@customer.Name">
-                                    @foreach (Account account in customer.Accounts)
-                                    {
-                                        <option value="@account.AccountNumber">@customer.Name.Split(' ')[0]'s @account.AccountType.ToString()</option>
-                                    }
-                                </optgroup>
-                            }
+
+                            <optgroup label="@customer.Name">
+                                @foreach (Account account in customer.Accounts)
+                                {
+                                    <option value="@account.AccountNumber">@customer.Name.Split(' ')[0]'s @account.AccountType.ToString()</option>
+                                }
+                            </optgroup>
+
                         }
                     </select>
                     <span asp-validation-for="ToAccount" class="text-danger"></span>
