@@ -15,6 +15,7 @@ namespace NwbaExample.ViewModels
         [Required]
         public Account FromAccount { get; set; }
         [Required]
+        [Display(Name = "To Payee")]
         public Payee ToPayee { get; set; }
         [Required]
         public decimal Amount { get; set; }
