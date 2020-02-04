@@ -30,6 +30,7 @@ namespace NwbaExample
             {
                 // Make the session cookie essential.
                 options.Cookie.IsEssential = true;
+                options.IdleTimeout = new System.TimeSpan(0, 1, 0);
             });
 
             services.AddControllersWithViews();

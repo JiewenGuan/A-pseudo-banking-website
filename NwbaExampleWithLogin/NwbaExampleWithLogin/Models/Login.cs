@@ -15,12 +15,43 @@ namespace NwbaExample.Models
         public DateTime ModifyDate { get; set; }
         [Required]
         public int CustomerID { get; set; }
+        public int BadAttempt { get; set; }
+        public DateTime lastBadLogin { get; set; }
         //Nav
         public virtual Customer Customer { get; set; }
 
         public void NewPassword(string comment)
         {
             PasswordHash = PBKDF2.Hash(comment);
+            ModifyDate = DateTime.Now;
+        }
+
+
+        public bool Verify(string password)
+        {
+            if ((DateTime.Now - lastBadLogin).TotalMinutes < 1 && BadAttempt > 2)
+                return false;
+
+            if (PBKDF2.Verify(PasswordHash, password))
+            {
+                BadAttempt = 0;
+                return true;
+            }
+            else
+            {
+                BadAttempt += 1;
+                lastBadLogin = DateTime.Now;
+                return false;
+            }
+        }
+        public void Lock()
+        {
+            BadAttempt = 3;
+            lastBadLogin = DateTime.Now;
+        }
+        public void Unlock()
+        {
+            BadAttempt = 0;
         }
     }
 }

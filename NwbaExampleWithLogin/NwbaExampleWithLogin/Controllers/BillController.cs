@@ -28,7 +28,6 @@ namespace NwbaExample.Controllers
             var bills = new List<Bill>();
             foreach (Account account in customer.Accounts)
                 bills.AddRange(account.Bills);
-
             return View(bills.OrderBy(x=>x.Status));
         }
 

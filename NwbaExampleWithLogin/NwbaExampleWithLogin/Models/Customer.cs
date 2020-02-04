@@ -32,6 +32,7 @@ namespace NwbaExample.Models
         public string Phone { get; set; }
         //Nav
         public virtual List<Account> Accounts { get; set; }
+
         public virtual Login Login { get; set; }
 
         public void Update(string name, string tfn, string address, string city, string state, string postCode, string phone)

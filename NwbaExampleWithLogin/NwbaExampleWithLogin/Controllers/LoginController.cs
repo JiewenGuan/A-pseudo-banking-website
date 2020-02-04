@@ -16,16 +16,22 @@ namespace NwbaExample.Controllers
 
         public IActionResult Login() => View();
 
+        private bool Verify(Login login, string password)
+        {
+            bool ret = login.Verify(password);
+            _context.SaveChanges();
+            return ret;
+        }
+
         [HttpPost]
         public async Task<IActionResult> Login(string loginID, string password)
         {
             var login = await _context.Logins.FindAsync(loginID);
-            if(login == null || !PBKDF2.Verify(login.PasswordHash, password))
-            { 
+            if(login == null || !Verify(login,password))
+            {
                 ModelState.AddModelError("LoginFailed", "Login failed, please try again.");
                 return View(new Login { LoginID = loginID });
             }
-
             // Login customer.
             HttpContext.Session.SetInt32(nameof(Customer.CustomerID), login.CustomerID);
             HttpContext.Session.SetString(nameof(Customer.Name), login.Customer.Name);

@@ -16,6 +16,7 @@ namespace NwbaExample.Models
     }
     public enum BillStatus
     {
+        Blocked = 0,
         Overdue = 1,
         Active = 2,
         Deactivated = 3
@@ -88,6 +89,10 @@ namespace NwbaExample.Models
         public void Deactivate()
         {
             Status = BillStatus.Deactivated;
+        }
+        public void Block()
+        {
+            Status = BillStatus.Blocked;
         }
     }
 }

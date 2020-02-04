@@ -58,7 +58,7 @@
                     @Html.DisplayFor(modelItem => item.ModifyDate)
                 </td>
                 <td>
-                    @if (item.Status != BillStatus.Deactivated)
+                    @if (item.Status != BillStatus.Deactivated || item.Status != BillStatus.Blocked)
                     {
                         <a asp-action="Edit" asp-route-id="@item.BillID" class="btn btn-primary">Edit</a>
                         <a asp-action="Delete" asp-route-id="@item.BillID" class="btn btn-primary">Delete</a>

@@ -130,6 +130,9 @@ namespace NwbaExampleWithLogin.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<int>("BadAttempt")
+                        .HasColumnType("int");
+
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
 
@@ -140,6 +143,9 @@ namespace NwbaExampleWithLogin.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(64)")
                         .HasMaxLength(64);
+
+                    b.Property<DateTime>("lastBadLogin")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("LoginID");
 
