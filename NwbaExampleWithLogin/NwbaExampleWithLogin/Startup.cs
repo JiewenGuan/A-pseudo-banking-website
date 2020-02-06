@@ -54,6 +54,7 @@ namespace NwbaExample
             app.UseSession();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseStatusCodePagesWithRedirects("Home/StatusCode/?code={0}");
 
             app.UseEndpoints(endpoints =>
             {

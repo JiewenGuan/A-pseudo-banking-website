@@ -470,3 +470,4 @@ C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\D
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Bill\Edit.cshtml.g.cs
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Bill\Delete.cshtml.g.cs
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Customer\Password.cshtml.g.cs
+C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\NwbaExampleWithLogin\obj\Debug\netcoreapp3.1\Razor\Views\Home\StatusCode.cshtml.g.cs

@@ -18,5 +18,9 @@ namespace NwbaExample.Controllers
         {
             throw new NotImplementedException();
         }
+        public IActionResult StatusCode(int? code = null)
+        {
+            return View(code);
+        }
     }
 }
