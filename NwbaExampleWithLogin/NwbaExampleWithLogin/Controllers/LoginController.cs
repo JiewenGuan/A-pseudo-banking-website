@@ -29,7 +29,11 @@ namespace NwbaExample.Controllers
             var login = await _context.Logins.FindAsync(loginID);
             if(login == null || !Verify(login,password))
             {
+                if(login.BadAttempt<2)
                 ModelState.AddModelError("LoginFailed", "Login failed, please try again.");
+                else
+                    ModelState.AddModelError("LoginFailed", "Account Locked!");
+
                 return View(new Login { LoginID = loginID });
             }
             // Login customer.

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NwbaExample.Data;
+using NwbaExampleWithLogin.Models.DataManager;
 
 namespace NwbaExample
 {
@@ -24,6 +25,12 @@ namespace NwbaExample
                 // Enable lazy loading.
                 options.UseLazyLoadingProxies();
             });
+            services.AddTransient<AccountManager>();
+            services.AddTransient<BillsManager>();
+            services.AddTransient<CustomerManager>();
+            services.AddTransient<LoginManager>();
+            services.AddTransient<PayeeManager>();
+            services.AddTransient<TransactionManager>();
 
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
