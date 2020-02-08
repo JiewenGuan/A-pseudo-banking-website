@@ -52,6 +52,11 @@ namespace NwbaExample.Models
             return;
         }
 
+        internal void UnBlock()
+        {
+            Status = BillStatus.Active;
+        }
+
         [Required]
         [Display(Name = "Account")]
         public int AccountNumber { get; set; }

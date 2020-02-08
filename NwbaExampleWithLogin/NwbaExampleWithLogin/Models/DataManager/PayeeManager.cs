@@ -42,6 +42,30 @@ namespace NwbaExampleWithLogin.Models.DataManager
             return _context.Payees.ToList();
         }
 
+        public Payee GetDto(Payee t)
+        {
+            return new Payee
+            {
+                PayeeID = t.PayeeID,
+                PayeeName = t.PayeeName,
+                Address = t.Address,
+                City = t.City,
+                State = t.State,
+                PostCode = t.PostCode,
+                Phone = t.Phone
+            };
+        }
+
+        public IEnumerable<Payee> GetDto(IEnumerable<Payee> list)
+        {
+            var ret = new List<Payee>();
+            foreach (Payee t in list)
+            {
+                ret.Add(GetDto(t));
+            }
+            return ret;
+        }
+
         public int Update(int id, Payee item)
         {
             _context.Update(item);

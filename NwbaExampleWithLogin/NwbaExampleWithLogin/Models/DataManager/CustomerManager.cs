@@ -56,5 +56,34 @@ namespace NwbaExampleWithLogin.Models.DataManager
             _context.SaveChanges();
             return id;
         }
+        public int UnLock(int id)
+        {
+            Get(id).Login.Unlock();
+            _context.SaveChanges();
+            return id;
+        }
+
+        public Customer GetDto(Customer t)
+        {
+            return new Customer
+            {
+                CustomerID = t.CustomerID,
+                Name = t.Name,
+                Tfn = t.Tfn,
+                Address = t.Address,
+                City = t.City,
+                State = t.State,
+                PostCode = t.PostCode,
+                Phone = t.Phone
+            };
+        }
+
+        public IEnumerable<Customer> GetDto(IEnumerable<Customer> list)
+        {
+            List<Customer> ret = new List<Customer>();
+            foreach (Customer c in list)
+                ret.Add(GetDto(c));
+            return ret;
+        }
     }
 }

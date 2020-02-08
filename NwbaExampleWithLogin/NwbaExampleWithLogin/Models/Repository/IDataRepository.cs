@@ -12,5 +12,7 @@ namespace NwbaExampleWithLogin.Models.Repository
         TKey Add(TEntity item);
         TKey Update(TKey id, TEntity item);
         TKey Delete(TKey id);
+        TEntity GetDto(TEntity t);
+        IEnumerable<TEntity> GetDto(IEnumerable<TEntity> list);
     }
 }

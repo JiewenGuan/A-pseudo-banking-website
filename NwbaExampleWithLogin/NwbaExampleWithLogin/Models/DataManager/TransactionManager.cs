@@ -42,6 +42,32 @@ namespace NwbaExampleWithLogin.Models.DataManager
             return _context.Transactions.ToList();
         }
 
+        public Transaction GetDto(Transaction t)
+        {
+            return new Transaction
+            {
+                TransactionID = t.TransactionID,
+                TransactionType = t.TransactionType,
+                AccountNumber = t.AccountNumber,
+                Account = null,
+                DestinationAccountNumber = t.DestinationAccountNumber,
+                DestinationAccount = null,
+                Amount = t.Amount,
+                Comment = t.Comment,
+                TransactionTimeUtc = t.TransactionTimeUtc
+            };
+        }
+
+        public IEnumerable<Transaction> GetDto(IEnumerable<Transaction> list)
+        {
+            var ret = new List<Transaction>();
+            foreach (Transaction t in list)
+            {
+                ret.Add(GetDto(t));
+            }
+            return ret;
+        }
+
         public int Update(int id, Transaction item)
         {
             _context.Update(item);

@@ -42,6 +42,28 @@ namespace NwbaExampleWithLogin.Models.DataManager
             return _context.Accounts.ToList();
         }
 
+        public Account GetDto(Account t)
+        {
+            return new Account
+            {
+                AccountNumber = t.AccountNumber,
+                AccountType = t.AccountType,
+                CustomerID = t.CustomerID,
+                Balance = t.Balance,
+                ModifyDate = t.ModifyDate
+            };
+        }
+
+        public IEnumerable<Account> GetDto(IEnumerable<Account> list)
+        {
+            var ret = new List<Account>();
+            foreach (Account t in list)
+            {
+                ret.Add(GetDto(t));
+            }
+            return ret;
+        }
+
         public int Update(int id, Account item)
         {
             _context.Update(item);

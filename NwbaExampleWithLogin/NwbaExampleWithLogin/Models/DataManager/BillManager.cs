@@ -55,5 +55,34 @@ namespace NwbaExampleWithLogin.Models.DataManager
             _context.SaveChanges();
             return id;
         }
+
+        internal int UnBlock(int id)
+        {
+            Get(id).UnBlock();
+            _context.SaveChanges();
+            return id;
+        }
+
+        public Bill GetDto(Bill t)
+        {
+            return new Bill
+            {
+                AccountNumber = t.AccountNumber,
+                PayeeID = t.PayeeID,
+                Amount = t.Amount,
+                ScheduleDate = t.ScheduleDate,
+                Period = t.Period,
+                Status = t.Status,
+                ModifyDate = t.ModifyDate
+            };
+        }
+
+        public IEnumerable<Bill> GetDto(IEnumerable<Bill> list)
+        {
+            List<Bill> ret = new List<Bill>();
+            foreach (Bill b in list)
+                ret.Add(GetDto(b));
+            return ret;
+        }
     }
 }
