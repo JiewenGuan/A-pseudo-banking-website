@@ -23,6 +23,12 @@ namespace AdminPortal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession(options =>
+            {
+                // Make the session cookie essential.
+                options.Cookie.IsEssential = true;
+                options.IdleTimeout = new System.TimeSpan(0, 5, 0);
+            });
             services.AddControllersWithViews();
         }
 
@@ -41,9 +47,9 @@ namespace AdminPortal
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
-
+            //app.UseStatusCodePagesWithRedirects("/Home/StatusCode/?code={0}");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
