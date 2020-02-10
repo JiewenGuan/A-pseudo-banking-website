@@ -1,14 +1,11 @@
 ﻿@model IEnumerable<AdminPortal.Models.Customer>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Users";
 }
 
-<h1>Index</h1>
+<h1>Users</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -67,9 +64,9 @@
                 @Html.DisplayFor(modelItem => item.Phone)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Edit", "Edit", new {  id=item.CustomerID  }) |
+                @Html.ActionLink("Transactions", "Transaction", new {  id=item.CustomerID  }) |
+                @Html.ActionLink("Bills", "Bills", new {  id=item.CustomerID })
             </td>
         </tr>
 }

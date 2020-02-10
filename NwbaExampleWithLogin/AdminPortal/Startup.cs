@@ -50,7 +50,7 @@ namespace AdminPortal
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
-            app.UseStatusCodePagesWithRedirects("/Home/StatusCode/?code={0}");
+            //app.UseStatusCodePagesWithRedirects("/Home/StatusCode/?code={0}");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

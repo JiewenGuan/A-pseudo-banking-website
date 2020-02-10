@@ -67,6 +67,7 @@ namespace NwbaExampleWithLogin.Models.DataManager
         {
             return new Bill
             {
+                BillID = t.BillID,
                 AccountNumber = t.AccountNumber,
                 PayeeID = t.PayeeID,
                 Amount = t.Amount,

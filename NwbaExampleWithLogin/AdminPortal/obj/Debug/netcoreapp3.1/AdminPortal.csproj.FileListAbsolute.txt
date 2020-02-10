@@ -141,3 +141,5 @@ C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\AdminPortal\bin\Debug\netc
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\AdminPortal\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\AdminPortal\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\AdminPortal\obj\Debug\netcoreapp3.1\AdminPortal.MvcApplicationPartsAssemblyInfo.cache
+C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\AdminPortal\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Bills.cshtml.g.cs
+C:\2020Summer\WDT\Assignments\A2\NwbaExampleWithLogin\AdminPortal\obj\Debug\netcoreapp3.1\Razor\Views\Admin\Transaction.cshtml.g.cs

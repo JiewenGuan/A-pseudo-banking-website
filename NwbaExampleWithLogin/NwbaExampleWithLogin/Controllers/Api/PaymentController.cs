@@ -33,10 +33,15 @@ namespace NwbaExampleWithLogin.Controllers.Api
                 ret.AddRange(acc.Bills);
             return _billRepo.GetDto(ret);
         }
-        [HttpPut("{id}")]
+        [HttpGet("[action]/{id}")]
         public int Block(int id)
         {
             return _billRepo.Block(id);
+        }
+        [HttpGet("[action]/{id}")]
+        public int UnBlock(int id)
+        {
+            return _billRepo.UnBlock(id);
         }
     }
 }
