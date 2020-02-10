@@ -55,6 +55,7 @@ namespace NwbaExample.Models
         internal void UnBlock()
         {
             Status = BillStatus.Active;
+            ModifyDate = DateTime.Now;
         }
 
         [Required]
@@ -94,10 +95,12 @@ namespace NwbaExample.Models
         public void Deactivate()
         {
             Status = BillStatus.Deactivated;
+            ModifyDate = DateTime.Now;
         }
         public void Block()
         {
             Status = BillStatus.Blocked;
+            ModifyDate = DateTime.Now;
         }
     }
 }

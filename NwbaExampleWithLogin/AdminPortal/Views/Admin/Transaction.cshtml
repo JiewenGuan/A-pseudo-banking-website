@@ -10,7 +10,14 @@
 }
 
 <h3>@name Transactions</h3>
-
+<form asp-action="transaction" method="get">
+    <input type="hidden" value="@ViewBag.UserId" />
+    <label for="sDate">Start Date</label>
+    <input name="sDate" type="date" />
+    <label for="eDate">End Date</label>
+    <input name="eDate" type="date" />
+    <input type="submit" value="Search" />
+</form>
 <table class="table">
     <thead>
         <tr>
