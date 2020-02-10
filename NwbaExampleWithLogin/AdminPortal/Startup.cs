@@ -30,6 +30,7 @@ namespace AdminPortal
                 options.IdleTimeout = new System.TimeSpan(0, 5, 0);
             });
             services.AddControllersWithViews();
+            services.AddHttpClient();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +50,7 @@ namespace AdminPortal
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
-            //app.UseStatusCodePagesWithRedirects("/Home/StatusCode/?code={0}");
+            app.UseStatusCodePagesWithRedirects("/Home/StatusCode/?code={0}");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

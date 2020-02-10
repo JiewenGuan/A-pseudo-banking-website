@@ -21,7 +21,7 @@ namespace AdminPortal.Controllers
             if (loginID == "admin" && password == "admin")
             {
                 HttpContext.Session.SetString("admin", "admin");
-                return RedirectToAction("index", "home");
+                return RedirectToAction("index", "admin");
             }
             else
             {
@@ -35,7 +35,7 @@ namespace AdminPortal.Controllers
             // Logout customer.
             HttpContext.Session.Clear();
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "home");
         }
     }
 }

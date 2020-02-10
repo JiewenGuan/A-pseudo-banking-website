@@ -9,8 +9,8 @@ namespace AdminPortal.Attributes
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            var customerID = context.HttpContext.Session.GetInt32("admin");
-            if (!customerID.HasValue)
+            var customerID = context.HttpContext.Session.GetString("admin");
+            if (string.IsNullOrEmpty(customerID))
             {
                 context.Result = new RedirectToActionResult("Index", "Home", null);
             }
