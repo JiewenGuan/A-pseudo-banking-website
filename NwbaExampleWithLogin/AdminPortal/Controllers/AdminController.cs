@@ -57,6 +57,72 @@ namespace AdminPortal.Controllers
 
             return View(transactions);
         }
+
+        public async Task<IActionResult> Statistics(int id)
+        {
+            var response = await AdminApi.InitializeClient().GetAsync("transaction/" + id.ToString());
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception();
+
+            // Storing the response details recieved from web api.
+            var result = response.Content.ReadAsStringAsync().Result;
+
+            // Deserializing the response recieved from web api and storing into a list.
+            var transactions = JsonConvert.DeserializeObject<List<Transaction>>(result);
+
+            return View(Bar(transactions));
+        }
+        private List<List<SimpleReportViewModel>> Bar(List<Transaction> transactions)
+        {
+            var ret = new List<List<SimpleReportViewModel>>();
+            var incomeList = new List<SimpleReportViewModel>();
+            var spendingList = new List<SimpleReportViewModel>();
+            var pieList = new List<SimpleReportViewModel>();
+            DateTime start = DateTime.Today.AddYears(-1);
+            for (int i = 0; i < 12; i++)
+            {
+                decimal incoming = 0, outgoing = 0;
+                foreach (Transaction t in transactions)
+                    if (start.Year == t.TransactionTimeUtc.Year && start.Month == t.TransactionTimeUtc.Month)
+                    {
+                        if (t.TransactionType == TransactionType.Deposit)
+                            incoming += t.Amount;
+                        else
+                            outgoing += t.Amount;
+                    }
+                incomeList.Add(new SimpleReportViewModel
+                {
+                    DimensionOne = start.ToString("yyyy/MMMM"),
+                    Quantity = incoming
+                });
+                spendingList.Add(new SimpleReportViewModel
+                {
+                    DimensionOne = start.ToString("yyyy/MMMM"),
+                    Quantity = outgoing
+                });
+                start = start.AddMonths(1);
+            }
+            foreach(TransactionType type in (TransactionType[])Enum.GetValues(typeof(TransactionType)))
+            {
+                decimal amount = 0;
+                foreach(Transaction transaction in transactions)
+                    if (transaction.TransactionType == type)
+                        amount += transaction.Amount;
+                
+                pieList.Add(new SimpleReportViewModel
+                {
+                    DimensionOne = type.ToString(),
+                    Quantity = amount
+                });
+            }
+           
+            ret.Add(incomeList);
+            ret.Add(spendingList);
+            ret.Add(pieList);
+            return ret;
+        }
+
         public async Task<IActionResult> Bills(int id)
         {
             ViewBag.UserId = id;
@@ -122,11 +188,11 @@ namespace AdminPortal.Controllers
                 ModelState.AddModelError(nameof(customer.Phone), "Invalid Phone Number");
             if (ModelState.IsValid)
             {
-                
+
                 var response = await AdminApi.InitializeClient().GetAsync
                     ($"update/{id}?name={customer.Name}&tfn={customer.Tfn}&address={customer.Address}&city={customer.City}&state={customer.State}&postcode={customer.PostCode}&phone={customer.Phone}");
 
-                
+
 
 
                 if (response.IsSuccessStatusCode)

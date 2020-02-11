@@ -64,9 +64,11 @@
                 @Html.DisplayFor(modelItem => item.Phone)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new {  id=item.CustomerID  }) |
-                @Html.ActionLink("Transactions", "Transaction", new {  id=item.CustomerID  }) |
-                @Html.ActionLink("Bills", "Bills", new {  id=item.CustomerID })
+                @Html.ActionLink("Edit", "Edit", new { id = item.CustomerID }) |
+                @Html.ActionLink("Transactions", "Transaction", new { id = item.CustomerID })<br />
+                @Html.ActionLink("Bills", "Bills", new { id = item.CustomerID }) |
+                @Html.ActionLink("Statistics", "Statistics", new { id = item.CustomerID })
+
             </td>
         </tr>
 }
