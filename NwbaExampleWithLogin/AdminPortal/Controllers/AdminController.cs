@@ -9,6 +9,8 @@ using AdminPortal.Web.Helper;
 using Newtonsoft.Json;
 using AdminPortal.Attributes;
 using System.Linq;
+using System.Net.Mime;
+using System.Text.RegularExpressions;
 
 namespace AdminPortal.Controllers
 {
@@ -87,6 +89,51 @@ namespace AdminPortal.Controllers
                 throw new Exception();
             else
                 return RedirectToAction(nameof(Bills), new { id = user });
+        }
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var response = await AdminApi.InitializeClient().GetAsync($"user/{id}");
+
+            if (!response.IsSuccessStatusCode)
+                throw new Exception();
+
+            var result = response.Content.ReadAsStringAsync().Result;
+            var user = JsonConvert.DeserializeObject<Customer>(result);
+
+            return View(user);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditAsync(int id, Customer customer)
+        {
+            if (id != customer.CustomerID)
+                return NotFound();
+            Regex rgx = new Regex(@"^\(61\)-[1-9]{8}$");
+            if (string.IsNullOrEmpty(customer.Name))
+                ModelState.AddModelError(nameof(customer.Name), "Arya? Is that you?");
+            if (string.IsNullOrEmpty(customer.Phone))
+                ModelState.AddModelError(nameof(customer.Phone), "Get a Number!");
+            if (!string.IsNullOrEmpty(customer.Tfn) && customer.Tfn.Length != 11)
+                ModelState.AddModelError(nameof(customer.Tfn), "TFN invalid");
+            if (!rgx.IsMatch(customer.Phone))
+                ModelState.AddModelError(nameof(customer.Phone), "Invalid Phone Number");
+            if (ModelState.IsValid)
+            {
+                
+                var response = await AdminApi.InitializeClient().GetAsync
+                    ($"update/{id}?name={customer.Name}&tfn={customer.Tfn}&address={customer.Address}&city={customer.City}&state={customer.State}&postcode={customer.PostCode}&phone={customer.Phone}");
+
+                
+
+
+                if (response.IsSuccessStatusCode)
+                    return RedirectToAction("Index");
+            }
+
+            return View(customer);
         }
     }
 }

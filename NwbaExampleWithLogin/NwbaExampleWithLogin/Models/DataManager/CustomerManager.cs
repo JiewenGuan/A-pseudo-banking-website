@@ -42,9 +42,9 @@ namespace NwbaExampleWithLogin.Models.DataManager
             return _context.Customers.ToList();
         }
 
-        public int Update(int id, Customer item)
+        public int Update(int id, string name, string tfn, string address, string city, string state, string postcode, string phone)
         {
-            _context.Update(item);
+            Get(id).Update(name, tfn, address, city, state, postcode, phone);
             _context.SaveChanges();
 
             return id;
@@ -84,6 +84,11 @@ namespace NwbaExampleWithLogin.Models.DataManager
             foreach (Customer c in list)
                 ret.Add(GetDto(c));
             return ret;
+        }
+
+        public int Update(int id, Customer item)
+        {
+            throw new NotImplementedException();
         }
     }
 }

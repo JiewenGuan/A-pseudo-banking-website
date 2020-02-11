@@ -45,16 +45,7 @@ namespace NwbaExampleWithLogin.Controllers.Api
             _customerRepo.Delete(id);
             return id;
         }
-        [HttpPut]
-        public int Update([FromBody] Customer customer)
-        {
-            _customerRepo.Update(customer.CustomerID, customer);
-            return customer.CustomerID;
-        }
-        [HttpPost]
-        public void Add([FromBody] Customer customer)
-        {
-            _customerRepo.Add(customer);
-        }
+        
+        
     }
 }

@@ -28,7 +28,7 @@ namespace AdminPortal.Models
         [StringLength(4), Display(Name = "Post Code")]
         public string PostCode { get; set; }
         
-        [Required, StringLength(15),RegularExpression("^(61)-[1-9]{8}$")]
+        [Required, StringLength(15),RegularExpression(@"^\(61\)-[1-9]{8}$")]
         public string Phone { get; set; }
         //Nav
         public virtual List<Account> Accounts { get; set; }
